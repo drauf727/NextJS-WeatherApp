@@ -1,0 +1,2 @@
+# NextJS-WeatherApp
+Testing NextJS
