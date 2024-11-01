@@ -3,9 +3,7 @@ import { useWeather } from '../context/WeatherContext';
 
 export default function TodaysWeather({ weatherData }) {
     const { currentWeather } = useWeather();
-
-    console.log('currentWeather:', currentWeather);
-
+    
     const getWeatherImage = (weather) => {
         switch(weather) {
             case 'Clouds': return 'cloud.png';

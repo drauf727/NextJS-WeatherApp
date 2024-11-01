@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useWeather } from '../context/WeatherContext';
 
-export default function Search({ onSearch }) {
+export default function Search({ onSearch, onCitySelect }) {
     const [city, setCity] = useState('');
     const { getWeatherData, error } = useWeather();
 
@@ -10,7 +10,8 @@ export default function Search({ onSearch }) {
         e.preventDefault();
         if (city.trim()) {
             await getWeatherData(city);
-            onSearch?.(city); // Call onSearch prop if provided
+            onSearch?.(city); // Original onSearch prop
+            onCitySelect?.(city); // Add this to update recent searches
             setCity(''); // Clear input after search
         }
     };
