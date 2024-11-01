@@ -1,18 +1,30 @@
-import Image from "next/image";
+'use client';
 import Header from "./components/layout/Header";
-import Sidebar from "./components/layout/sidebar";
+import Sidebar from "./components/layout/Sidebar";
+import TodaysWeather from "./components/todaysweather";
+import FiveDayWeather from "./components/5dayweather";
+
 export default function Home() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <div className="flex flex-1">
-        <aside className="w-64 sticky top-0 h-[calc(100vh-64px)] bg-gray-100 p-4">
-          <Sidebar />
-        </aside>
-        <main className="flex-1 p-8">
-          {/* Main content will go here */}
-        </main>
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex flex-col min-h-screen">
+            {/* Header */}
+            <Header />
+            
+            {/* Content Container */}
+            <div className="flex flex-1">
+                {/* Sidebar */}
+                <div className="w-64 border-r bg-gray-50">
+                    <Sidebar />
+                </div>
+                
+                {/* Main Content */}
+                <main className="flex-1 p-8">
+                    <div className="space-y-8">
+                        <TodaysWeather />
+                        <FiveDayWeather />
+                    </div>
+                </main>
+            </div>
+        </div>
+    );
 }

@@ -1,75 +1,39 @@
-"use client";
+'use client';
 import { useState } from 'react';
+import Search from '../search';
 
 export default function Sidebar() {
-    // State for input and search history
-    const [searchInput, setSearchInput] = useState('');
     const [searchHistory, setSearchHistory] = useState([]);
 
-    // Handle the search action
-    const handleSearch = () => {
-        if (!searchInput.trim()) return; // Don't add empty searches
-
-        // Create new history item with unique ID
-        const newHistoryItem = {
-            id: Date.now(), // Using timestamp as a simple unique ID
-            city: searchInput.trim()
-        };
-
-        // Add new search to history (at the beginning of the array)
-        setSearchHistory(prevHistory => [newHistoryItem, ...prevHistory]);
-        
-        // Clear the input field
-        setSearchInput('');
-    };
-
-    // Handle removing items from history
-    const removeFromHistory = (idToRemove) => {
-        setSearchHistory(prevHistory => 
-            prevHistory.filter(item => item.id !== idToRemove)
-        );
+    // Function to add to search history
+    const addToHistory = (city) => {
+        if (!searchHistory.includes(city)) {
+            setSearchHistory(prev => [city, ...prev].slice(0, 5)); // Keep last 5 searches
+        }
     };
 
     return (
-        <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold leading-6 text-gray-900">
-                City Search
-            </h3>
-            <input 
-                type="text" 
-                placeholder="Search for a city" 
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-            />
-            <button 
-                className="bg-red-500 text-white px-4 py-2 rounded"
-                onClick={handleSearch}
-            >
-                Search
-            </button>
-
-            <div className="mt-6">
-                <h3 className="text-sm font-semibold leading-6 text-gray-900 mb-4">
-                    Search History
-                </h3>
-                <ul className="space-y-2">
-                    {searchHistory.map((item) => (
-                        <li 
-                            key={item.id}
-                            className="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 cursor-pointer"
-                        >
-                            <span>{item.city}</span>
-                            <button 
-                                className="text-gray-400 hover:text-red-500"
-                                onClick={() => removeFromHistory(item.id)}
+        <div className="bg-gray-100 p-4 h-full">
+            <h2 className="text-xl font-semibold mb-4">Search for a City:</h2>
+            <Search onSearch={addToHistory} />
+            
+            {/* Search History */}
+            {searchHistory.length > 0 && (
+                <div className="mt-4">
+                    <h3 className="text-lg font-medium mb-2">Recent Searches:</h3>
+                    <div className="space-y-2">
+                        {searchHistory.map((city, index) => (
+                            <button
+                                key={index}
+                                className="w-full text-left px-4 py-2 bg-white rounded shadow hover:bg-gray-50"
+                                onClick={() => getWeatherData(city)}
                             >
-                                ×
+                                {city}
                             </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
