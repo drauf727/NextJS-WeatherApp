@@ -1,7 +1,7 @@
 'use client';
 import { useWeather } from '../context/WeatherContext';
 
-export default function TodaysWeather() {
+export default function TodaysWeather({ weatherData }) {
     const { currentWeather } = useWeather();
 
     console.log('currentWeather:', currentWeather);
@@ -25,7 +25,7 @@ export default function TodaysWeather() {
             case 'Drizzle': return 'drizzledetail.jpg';
             case 'Rain': return 'rainydetail.jpg';
             case 'Snow': return 'snowdetail.jpg';
-            case 'Clear': return 'cleardetail.jpg';
+            case 'Clear': return 'clear2detail.jpg';
             default: return 'unknowndetail.jpg';
         }
     }
@@ -42,34 +42,33 @@ export default function TodaysWeather() {
     const today = new Date();
 
     return (
-        <div className="flex gap-8">
-            <div className="bg-white p-4 rounded-lg shadow">
-                <h1 className="text-2xl font-bold mb-2">{currentWeather.name}</h1>
-                <img 
-                    src={`/weatherimages/${getWeatherImage(currentWeather.weather[0].main)}`}
-                    height="50" 
-                    width="50" 
-                    alt="weather icon"
-                    className="my-2"
-                />
-                <div className="space-y-2">
-                    <p>{`${today.getMonth() + 1}/${today.getDate()}`}</p>
-                    <p>Temperature: {temp}°F</p>
-                    <p>Wind Speed: {currentWeather.wind.speed} MPH</p>
-                    <p>Humidity: {currentWeather.main.humidity}%</p>
+        <div className="bg-white rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-6">
+                    <h1 className="text-2xl font-bold mb-2">{currentWeather.name}</h1>
+                    <img 
+                        src={`/weatherimages/${getWeatherImage(currentWeather.weather[0].main)}`}
+                        height="50" 
+                        width="50" 
+                        alt="weather icon"
+                        className="my-2"
+                    />
+                    <div className="space-y-2">
+                        <p className="font-bold">Today's Weather:</p>
+                        <p>Temperature: {temp}°F</p>
+                        <p>Wind Speed: {currentWeather.wind.speed} MPH</p>
+                        <p>Humidity: {currentWeather.main.humidity}%</p>
+                    </div>
                 </div>
-            </div>
 
-            {currentWeather.weather && currentWeather.weather[0] && (
-                <div className="flex-1">
-                    {console.log('Image path:', `/weatherimages/${getDetailImage(currentWeather.weather[0].main)}`)}
+                <div className="hidden md:block">
                     <img 
                         src={`/weatherimages/${getDetailImage(currentWeather.weather[0].main)}`}
                         alt="weather"
                         className="w-full h-[400px] object-cover rounded-lg"
                     />
                 </div>
-            )}
+            </div>
         </div>
     );
 }

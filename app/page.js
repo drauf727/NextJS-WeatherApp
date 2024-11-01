@@ -11,15 +11,15 @@ export default function Home() {
             <Header />
             
             {/* Content Container */}
-            <div className="flex flex-1">
+            <div className="flex flex-col md:flex-row flex-1">
                 {/* Sidebar */}
-                <div className="w-64 border-r bg-gray-50">
+                <div className="w-full md:w-64 border-b md:border-r bg-gray-50">
                     <Sidebar />
                 </div>
                 
                 {/* Main Content */}
-                <main className="flex-1 p-8">
-                    <div className="space-y-8">
+                <main className="flex-1 p-4 md:p-8">
+                    <div className="space-y-4 md:space-y-8">
                         <TodaysWeather />
                         <FiveDayWeather />
                     </div>

@@ -1,7 +1,7 @@
 'use client';
 import { useWeather } from '../context/WeatherContext';
 
-export default function FiveDayWeather() {
+export default function FiveDayWeather({ weatherData }) {
   const { forecast } = useWeather();
 
   if (!forecast) return null;
@@ -19,9 +19,9 @@ export default function FiveDayWeather() {
   };
 
   return (
-    <div className="p-2">
-      <h3 className="text-center text-2xl font-bold">Forecast For Next 5 Days:</h3>
-      <div className="flex p-2 justify-center" id="card-container">
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <h2 className="text-xl font-semibold mb-4">5-Day Forecast</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {[0, 8, 16, 24, 32].map((index) => {
           const day = forecast.list[index];
           const date = new Date();
@@ -29,7 +29,7 @@ export default function FiveDayWeather() {
           const temp = Math.round((day.main.temp - 273.15) * 1.8 + 32);
 
           return (
-            <div key={index} className="bg-gray-100 rounded-lg shadow-md m-3 p-4" style={{ width: '12rem' }}>
+            <div key={index} className="bg-gray-50 rounded-lg p-4 shadow">
               <h4 className="font-semibold">
                 {`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`}
               </h4>

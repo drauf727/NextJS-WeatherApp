@@ -13,7 +13,7 @@ export function WeatherProvider({ children }) {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [error, setError] = useState(null);
-  const apiKey = '5ccfb87c2313dc93a4278d2086ead169';
+  const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
   const getWeatherData = async (city) => {
     try {
