@@ -3,7 +3,7 @@ import { useWeather } from '../context/WeatherContext';
 
 export default function TodaysWeather({ weatherData }) {
     const { currentWeather } = useWeather();
-    
+
     const getWeatherImage = (weather) => {
         switch(weather) {
             case 'Clouds': return 'cloud.png';
@@ -52,7 +52,7 @@ export default function TodaysWeather({ weatherData }) {
                         className="my-2"
                     />
                     <div className="space-y-2">
-                        <p className="font-bold">Today's Weather:</p>
+                        <p className="font-bold">Todays Weather:</p>
                         <p>Temperature: {temp}°F</p>
                         <p>Wind Speed: {currentWeather.wind.speed} MPH</p>
                         <p>Humidity: {currentWeather.main.humidity}%</p>
