@@ -1,6 +1,6 @@
 'use client';
 import Header from "./components/layout/Header";
-import Sidebar from "./components/layout/Sidebar";
+import Sidebar from "./components/layout/sidebar";
 import TodaysWeather from "./components/todaysweather";
 import FiveDayWeather from "./components/5dayweather";
 
